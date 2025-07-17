@@ -4,7 +4,7 @@ This is a fun project which I have used to teach myself Rust programming.
 (The Rust code here is probably sub-optimal and may not be idiomatic, but this was a learning project 😊)
 
 ## Puzzle Files
-The puzzle files in the `data` folder are from: [https://github.com/mikix/nonogram-db](https://github.com/mikix/nonogram-db)
+The puzzle files in the `data` folder are from: [https://github.com/mikix/nonogram-db](https://github.com/mikix/nonogram-db). However, I have modified the files to use a YAML format that is more suitable for this project.
 Each puzzle file is a YAML file which contains the puzzle definition. The required format should be clear from an examination of any one of the puzzle files in the `data` directory.
 
 ## Example Usage

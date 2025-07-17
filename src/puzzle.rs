@@ -5,6 +5,8 @@ use colored::Colorize;
 #[derive(Debug)]
 pub struct Puzzle {
     pub title: String,
+    pub author: String,
+    pub license: String,
     pub row_clues: Vec<Vec<u8>>,
     pub col_clues: Vec<Vec<u8>>,
     pub rows: Vec<Line>,
@@ -131,7 +133,10 @@ impl Puzzle {
     }
 
     pub fn dump(&self) {
-        println!("\n{}", self.title.yellow());
+        println!("\nTitle: {}", self.title);
+        if !self.author.is_empty() {
+            println!("Author: {}", self.author);
+        }
 
         for i in 0..(self.max_col_clue_length()) {
             let mut display_col_clues = String::new();
