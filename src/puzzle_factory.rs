@@ -11,6 +11,7 @@ pub struct PuzzleConfig {
     pub title: String,
     pub by: Option<String>,
     pub license: Option<String>,
+    pub source: Option<String>,
     pub rows: Vec<Vec<u8>>,
     pub columns: Vec<Vec<u8>>,
 }
@@ -95,10 +96,16 @@ impl PuzzleConfig {
         } else {
             String::from("")
         };
+        let source = if let Some(source) = deserialized_puzzle.source {
+            source
+        } else {
+            String::from("")
+        };
         let new_puzzle = Puzzle {
             title: deserialized_puzzle.title,
             author,
             license,
+            source,
             row_clues: deserialized_puzzle.rows.clone(),
             col_clues: deserialized_puzzle.columns.clone(),
             padding,

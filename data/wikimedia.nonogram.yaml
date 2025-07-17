@@ -1,8 +1,8 @@
-catalogue: "gnonograms wikimedia.gno"
 title: "Wikimedia"
 by: "Frederico Vera <dktcoding@gmail.com>"
 copyright: "© 2010 Frederico Vera <dktcoding@gmail.com>"
 license: CC-BY-SA-4.0
+source: "https://github.com/mikix/nonogram-db"
 height: 38
 width: 39
 rows:

@@ -1,5 +1,6 @@
 title: "Spades"
 by: "anon"
+source: "https://github.com/mikix/nonogram-db"
 rows:
   - [1]
   - [3]

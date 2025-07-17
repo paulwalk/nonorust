@@ -1,5 +1,7 @@
 title: "Pterodactyl"
 by: "anon"
+source: "https://github.com/mikix/nonogram-db"
+
 rows:
  - [3]
  - [4]

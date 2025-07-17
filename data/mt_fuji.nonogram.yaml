@@ -1,5 +1,7 @@
 title: "Mt.Fuji"
 by: "Abdullah Ali Sivas"
+source: "https://github.com/mikix/nonogram-db"
+
 rows:
  - [6,4,3,3,4,6]
  - [6,3,3,3,3,6]

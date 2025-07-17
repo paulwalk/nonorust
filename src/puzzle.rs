@@ -7,6 +7,7 @@ pub struct Puzzle {
     pub title: String,
     pub author: String,
     pub license: String,
+    pub source: String,
     pub row_clues: Vec<Vec<u8>>,
     pub col_clues: Vec<Vec<u8>>,
     pub rows: Vec<Line>,
