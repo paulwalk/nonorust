@@ -11,7 +11,7 @@ Each puzzle file is a YAML file which contains the puzzle definition. The requir
 Compile the code, and then run the executable, pointing it to a puzzle file.  See the `data` directory for examples.
 
 ```bash
-nonorust nonorust --path=./data/spades.nonogram.yaml --max-iterations=100
+nonorust --path=./data/spades.nonogram.yaml --max-iterations=100
 ```
 
 
