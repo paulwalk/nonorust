@@ -1,7 +1,6 @@
 use nonorust::puzzle_factory::PuzzleConfig;
 use clap::Parser;
 use nonorust::cli::Args;
-use nonorust::line::LineType;
 
 // use flexi_logger::Logger;
 fn main() -> Result<(), Box<dyn std::error::Error>> {
