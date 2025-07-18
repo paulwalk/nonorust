@@ -1,6 +1,12 @@
 use crate::cell::{Cell, generate_cell_vector};
 use crate::line::Line;
 
+pub fn factorial(number : usize) -> usize{
+    let mut factorial : usize = 1;
+    for i in 1..(number+1) { factorial*=i; }
+    factorial
+}
+
 pub fn generate_all_potential_solutions_for_clue(clue: Vec<u8>, length: i8) -> Vec<Vec<Cell>> {
     if clue.len() == 0 {
         let mut solutions: Vec<Vec<Cell>> = Vec::new();

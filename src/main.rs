@@ -1,6 +1,7 @@
 use nonorust::puzzle_factory::PuzzleConfig;
 use clap::Parser;
 use nonorust::cli::Args;
+use nonorust::line::LineType;
 
 // use flexi_logger::Logger;
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -34,7 +35,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         puzzle_file_path,
         max_iterations
     );
-    
 
     let (iterations_needed_to_solve,puzzle_solved) = puzzle.solve(max_iterations);
     puzzle.dump();

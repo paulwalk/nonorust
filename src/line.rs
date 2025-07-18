@@ -1,5 +1,5 @@
 use crate::cell::{cell_vector_contains_unknown, Cell};
-use crate::line_algorithms::generate_all_potential_solutions_for_clue;
+use crate::line_algorithms::{generate_all_potential_solutions_for_clue, factorial};
 use colored::Colorize;
 
 #[derive(Debug, Clone)]
@@ -104,12 +104,19 @@ impl Line {
             cells_display += &cell.display();
         }
         println!(
-            "{}:  Clue: {:?}  Length: {}  Cells: {}",
+            "{}:  Clue: {:?}  Length: {}  Potential Solutions Remaining: {}  Cells: {}",
             self.label(),
             self.clue,
             self.length(),
+            self.potential_solutions.len(),
             cells_display.blue(),
         );
+    }
+
+    pub fn calculate_potential_solutions(&self) -> usize {
+        let sum_of_blocks:usize = self.clue.iter().map(|&x| x as usize).sum();
+        let n:usize = (self.length() as usize - sum_of_blocks) + 1;
+        factorial(n) / (factorial(self.clue.len()) * factorial(n - self.clue.len()))
     }
 
     pub fn dump_potential_solutions(&self) {
