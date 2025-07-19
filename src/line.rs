@@ -20,6 +20,7 @@ pub struct Line {
 
 impl Line {
     pub fn new(axis: LineType, index: u8, cells: Vec<Cell>, clue: Vec<u8>) -> Line {
+
         let potential_solutions =
             generate_all_potential_solutions_for_clue(clue.clone(), cells.len() as i8);
         let new_line = Line {
@@ -113,10 +114,10 @@ impl Line {
         );
     }
 
-    pub fn calculate_potential_solutions(&self) -> usize {
-        let sum_of_blocks:usize = self.clue.iter().map(|&x| x as usize).sum();
-        let n:usize = (self.length() as usize - sum_of_blocks) + 1;
-        factorial(n) / (factorial(self.clue.len()) * factorial(n - self.clue.len()))
+    pub fn calculate_all_potential_solutions(&self) -> u128 {
+        let sum_of_blocks:u128 = self.clue.iter().map(|&x| x as u128).sum();
+        let n:u128 = (self.length() as u128 - sum_of_blocks) + 1;
+        factorial(n) / (factorial(self.clue.len() as u128) * factorial(n - self.clue.len() as u128))
     }
 
     pub fn dump_potential_solutions(&self) {

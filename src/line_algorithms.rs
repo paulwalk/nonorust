@@ -1,9 +1,12 @@
 use crate::cell::{Cell, generate_cell_vector};
 use crate::line::Line;
 
-pub fn factorial(number : usize) -> usize{
-    let mut factorial : usize = 1;
-    for i in 1..(number+1) { factorial*=i; }
+pub fn factorial(number: u128) -> u128 {
+    let mut factorial: u128 = 1;
+    for i in 1..(number + 1) {
+        println!("i = {}, number = {}", i, number);
+        factorial *= i;
+    }
     factorial
 }
 
