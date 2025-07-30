@@ -1,22 +1,13 @@
 use nonorust::puzzle_factory::PuzzleConfig;
 use clap::Parser;
 use nonorust::cli::Args;
+use nonorust::logging::configure_flexi_logger;
 
 // use flexi_logger::Logger;
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = Args::parse();
-    let logging_level = if args.debug {
-        "debug"
-    } else {
-        "info"
-    };
-
-    flexi_logger::Logger::try_with_str(logging_level)?
-        .log_to_stdout()
-        .set_palette("1;5;32;3;-".parse().unwrap())
-        .start()?;
-
-
+    configure_flexi_logger(args.debug).expect("Failed to configure logger - quitting");
+    
     let puzzle_file_path = args.path;
     let max_iterations = args.max_iterations;
 
