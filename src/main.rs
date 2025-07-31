@@ -15,16 +15,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut puzzle = match puzzle_factory_result {
         Ok(puzzle) => puzzle,
         Err(e) => {
-            eprintln!("Error loading puzzle: {}", e);
+            eprintln!("Error loading puzzle: {e}");
             return Ok(());
         }
     };
 
     log::info!(
-        "Starting Nonogram solver with file: {} and max iterations set to: {}",
-        puzzle_file_path,
-        max_iterations
-    );
+        "Starting Nonogram solver with file: {puzzle_file_path} and max iterations set to: {max_iterations}");
 
     let (iterations_needed_to_solve,puzzle_solved) = puzzle.solve(max_iterations);
     puzzle.dump();
@@ -33,7 +30,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     } else {
         println!("Puzzle NOT solved!");
     }
-    println!("Iterations used: {}",iterations_needed_to_solve);
+    println!("Iterations used: {iterations_needed_to_solve}");
 
     Ok(())
 }

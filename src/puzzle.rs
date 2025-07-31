@@ -32,10 +32,10 @@ impl Puzzle {
             for i in 0..self.row_count() {
                 let mut line = self.get_line(LineType::Row, i);
                 let (line_is_solved, progress) = line.solve();
-                if line_is_solved == false {
+                if !line_is_solved {
                     puzzle_is_solved = false;
                 }
-                if progress == true {
+                if progress {
                     progress_was_made = true;
                 }
                 self.set_line(line);
@@ -43,10 +43,10 @@ impl Puzzle {
             for i in 0..self.col_count() {
                 let mut line = self.get_line(LineType::Col, i);
                 let (line_is_solved, progress) = line.solve();
-                if line_is_solved == false {
+                if !line_is_solved {
                     puzzle_is_solved = false;
                 }
-                if progress == true {
+                if progress {
                     progress_was_made = true;
                 }
                 self.set_line(line);
@@ -81,12 +81,12 @@ impl Puzzle {
                     match cell {
                         Cell::Block => {
                             let mut col_line = self.cols[i].clone();
-                            col_line.set_cell(line.index as u8, Cell::Block);
+                            col_line.set_cell(line.index, Cell::Block);
                             self.cols[i] = col_line.clone();
                         }
                         Cell::Space => {
                             let mut col_line = self.cols[i].clone();
-                            col_line.set_cell(line.index as u8, Cell::Space);
+                            col_line.set_cell(line.index, Cell::Space);
                             self.cols[i] = col_line.clone();
                         }
                         _ => (),
@@ -99,12 +99,12 @@ impl Puzzle {
                     match cell {
                         Cell::Block => {
                             let mut row_line = self.rows[i].clone();
-                            row_line.set_cell(line.index as u8, Cell::Block);
+                            row_line.set_cell(line.index, Cell::Block);
                             self.rows[i] = row_line.clone();
                         }
                         Cell::Space => {
                             let mut row_line = self.rows[i].clone();
-                            row_line.set_cell(line.index as u8, Cell::Space);
+                            row_line.set_cell(line.index, Cell::Space);
                             self.rows[i] = row_line.clone();
                         }
                         _ => (),
@@ -142,7 +142,7 @@ impl Puzzle {
         for i in 0..(self.max_col_clue_length()) {
             let mut display_col_clues = String::new();
             for clue in self.col_clues.iter() {
-                if clue.len() as u8 >= i + 1 {
+                if clue.len() as u8 > i {
                     display_col_clues += &format!(
                         "{:>width$} ",
                         clue[i as usize],
@@ -153,7 +153,7 @@ impl Puzzle {
                 }
             }
             print!("{}", display_col_clues.yellow());
-            println!("");
+            println!();
         }
         let rows = &self.rows.clone();
         for (line_index, line) in rows.iter().enumerate() {
@@ -166,12 +166,12 @@ impl Puzzle {
             print!("{}", display_cells.blue());
             display_cells = format!(" {}", clue_as_string(&self.row_clues[line_index]));
             print!("{}", display_cells.yellow());
-            println!("");
+            println!();
         }
     }
 }
 
-pub fn clue_as_string(clue: &Vec<u8>) -> String {
+pub fn clue_as_string(clue: &[u8]) -> String {
     let mut clue_string = String::new();
     for (i, c) in clue.iter().enumerate() {
         if i > 0 {

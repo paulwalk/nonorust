@@ -4,14 +4,14 @@ use crate::line::Line;
 pub fn factorial(number: u128) -> u128 {
     let mut factorial: u128 = 1;
     for i in 1..(number + 1) {
-        println!("i = {}, number = {}", i, number);
+        println!("i = {i}, number = {number}");
         factorial *= i;
     }
     factorial
 }
 
 pub fn generate_all_potential_solutions_for_clue(clue: Vec<u8>, length: i8) -> Vec<Vec<Cell>> {
-    if clue.len() == 0 {
+    if clue.is_empty() {
         let mut solutions: Vec<Vec<Cell>> = Vec::new();
         let cell_vector = generate_cell_vector(Cell::Space, length as u8);
         solutions.push(cell_vector);
@@ -60,7 +60,7 @@ impl Line {
                         break;
                     }
                 }
-                if found_non_block_cell == false {
+                if !found_non_block_cell {
                     self.set_cell(cell_index as u8, Cell::Block);
                     progress_made = true;
                 } else {
@@ -71,7 +71,7 @@ impl Line {
                             break;
                         }
                     }
-                    if found_non_space_cell == false {
+                    if !found_non_space_cell {
                         self.set_cell(cell_index as u8, Cell::Space);
                         progress_made = true;
                     }

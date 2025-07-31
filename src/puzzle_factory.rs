@@ -20,13 +20,13 @@ impl PuzzleConfig {
     pub fn build(file_path: String) -> Result<Puzzle> {
         let path = std::path::Path::new(&file_path);
         let display = path.display();
-        let file = match std::fs::File::open(&path) {
+        let file = match std::fs::File::open(path) {
             Ok(file) => {
                 log::debug!("Opened file OK");
                 file
             }
             Err(err) => {
-                eprintln!("Couldn't open {}: {}", display, err);
+                eprintln!("Couldn't open {display}: {err}");
                 return Err(err.into());
             }
         };
@@ -36,7 +36,7 @@ impl PuzzleConfig {
                 puzzle_config
             }
             Err(err) => {
-                eprintln!("Error deserializing YAML: {}", err);
+                eprintln!("Error deserializing YAML: {err}");
                 return Err(err.into());
             }
         };
@@ -86,21 +86,9 @@ impl PuzzleConfig {
             }
         }
         let padding = (largest_col_clue_num.to_string().len() + 1) as u8;
-        let author = if let Some(by) = deserialized_puzzle.by {
-            by
-        } else {
-            String::from("")
-        };
-        let license = if let Some(license) = deserialized_puzzle.license {
-            license
-        } else {
-            String::from("")
-        };
-        let source = if let Some(source) = deserialized_puzzle.source {
-            source
-        } else {
-            String::from("")
-        };
+        let author = deserialized_puzzle.by.unwrap_or_default();
+        let license = deserialized_puzzle.license.unwrap_or_default();
+        let source = deserialized_puzzle.source.unwrap_or_default();
         let new_puzzle = Puzzle {
             title: deserialized_puzzle.title,
             author,

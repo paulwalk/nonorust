@@ -20,17 +20,15 @@ pub struct Line {
 
 impl Line {
     pub fn new(axis: LineType, index: u8, cells: Vec<Cell>, clue: Vec<u8>) -> Line {
-
         let potential_solutions =
             generate_all_potential_solutions_for_clue(clue.clone(), cells.len() as i8);
-        let new_line = Line {
+        Line {
             axis,
             index,
             clue,
             cells,
             potential_solutions,
-        };
-        new_line
+        }
     }
 
     pub fn length(&self) -> u8 {
@@ -61,7 +59,7 @@ impl Line {
             return (line_solved, progress_made)
         }
 
-        if self.potential_solutions.len() > 0 && !cell_vector_contains_unknown(&self.cells) {
+        if !self.potential_solutions.is_empty() && !cell_vector_contains_unknown(&self.cells) {
             line_solved = true;
             progress_made = true;
             self.potential_solutions.clear();
@@ -71,8 +69,8 @@ impl Line {
         if self.potential_solutions.len() == 1 {
             let potential_solutions = self.potential_solutions.clone();
             for solution in potential_solutions {
-                for i in 0..solution.len() {
-                    self.set_cell(i as u8, solution[i].clone());
+                for (i, cell) in solution.iter().enumerate() {
+                    self.set_cell(i as u8, cell.clone());
                 }
             }
             self.potential_solutions.clear();
@@ -81,7 +79,7 @@ impl Line {
             // so that the puzzle solver records this line's changes.
             line_solved = false;
             progress_made = true;
-            return(line_solved, progress_made)
+            (line_solved, progress_made)
         } else {
             line_solved = false;
             progress_made = false;
@@ -91,12 +89,12 @@ impl Line {
             if progress_from_algorithm_1 || progress_from_algorithm_2 {
                 progress_made = true;
             }
-            return (line_solved, progress_made)
+            (line_solved, progress_made)
         }
     }
 
     pub fn is_solved(&self) -> bool {
-        self.potential_solutions.len() == 0
+        self.potential_solutions.is_empty()
     }
 
     pub fn dump(&self) {
