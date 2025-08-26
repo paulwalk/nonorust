@@ -1,7 +1,14 @@
-use nonorust::puzzle_factory::PuzzleConfig;
+pub mod puzzle;
+pub mod cell;
+pub mod puzzle_factory;
+pub mod line;
+pub mod line_algorithms;
+pub mod cli;
+pub mod logging;
+use crate::puzzle_factory::PuzzleConfig;
 use clap::Parser;
-use nonorust::cli::Args;
-use nonorust::logging::configure_flexi_logger;
+use crate::cli::Args;
+use crate::logging::configure_flexi_logger;
 
 // use flexi_logger::Logger;
 fn main() -> Result<(), Box<dyn std::error::Error>> {
